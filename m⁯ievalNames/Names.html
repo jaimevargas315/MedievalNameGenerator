@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <title>Medieval Name Generator</title>
+</head>
+<body >
+    <h1>Medieval Name Generator</h1>
+    <img class="animated"id="titleImage" alt="title image"/>
+    <p class="animated" id="name">
+    </p>
+    <button id="generate button" onclick="main()">New Name</button>
+
+<script>
+let firstNames = [];
+let lastNames = [];
+async function fetchFirst(){
+const firstData = await fetch('firstNames.txt')
+.then((res) => res.text())
+  .then((text) => {
+    const firstNames= text.split(' ');
+    return firstNames;
+   })
+   .then(function(data) {
+    firstNames =(data);
+   })
+  .catch((e) => console.error(e));
+}
+async function fetchLast(){
+const lastData = await fetch('lastNames.txt')
+  .then((res) => res.text())
+  .then((text) => {
+     const LATNAMES = text.split(',');
+     return LATNAMES;
+   })
+   .then(function(data) {
+    lastNames =(data);
+   })
+   .catch((e) => console.error(e));
+}
+
+ async function main() {
+ await fetchFirst();
+ await fetchLast();
+
+
+titles = ['Sir', 'Esquire', 'Madame', 'Lord', 'Master', 'Mister', 'Missus','King','Queen',
+          'Prince','Princess','Archmage','Lady','Duke','Count','Duchess','Countess','Baron',
+          'Baroness','Knight','Viscount','Viscountess','Marquess','Marchioness']
+
+let title = titles[Math.floor(Math.random() * titles.length)];
+let firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+let lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+
+const name = document.getElementById("name");
+name.innerText = title+ " \n" + firstName + " \n" + lastName
+
+const image = document.getElementById("titleImage");
+switch (title) {
+    case 'Sir':
+        image.src='sir.jpg';
+        break;
+    case 'Esquire':
+        image.src='Squire.webp';
+        break;
+    case 'Madame':
+        image.src='madame.jpg';
+        break;
+    case 'Lord':
+        image.src='lord.jpg';
+        break;
+    case 'Master':
+        image.src='master.jpg';
+        break;
+    case 'Mister':
+        image.src='mister.jpg';
+        break;
+    case 'Missus':
+        image.src='missus.jpg';
+        break;
+    case 'King':
+        image.src='king.jpg';
+        break;
+    case 'Queen':
+        image.src='queen.jpg';
+        break;
+    case 'Prince':
+        image.src='prince.jpg';
+        break;
+    case 'Princess':
+        image.src='princess.jpg';
+        break;
+    case 'Archmage':
+        image.src='archmage.jpg';
+        break;
+    case 'Lady':
+        image.src='lady.jpg';
+        break;
+    case 'Duke':
+        image.src='duke.jpg';
+        break;
+    case 'Count':
+        image.src='count.jpg';
+        break;
+    case 'Duchess':
+        image.src='duchess.avif';
+        break;
+    case 'Countess':
+        image.src='countess.jpg';
+        break;
+    case 'Baron':
+        image.src='baron.jpg';
+        break;
+    case 'Baroness':
+        image.src='baroness.jpg';
+        break;
+    case 'Knight':
+        image.src='knight.avif';
+        break;
+    case 'Viscount':
+        image.src='viscount.jpg';
+        break;
+    case 'Viscountess':
+        image.src='viscountess.jpg';
+        break;
+    case 'Marquess':
+        image.src='marquess.jpg';
+        break;
+    case 'Marchioness':
+        image.src='marchioness.jpg';
+        break;
+    default:
+}
+
+let opacity = 0;
+image.style.opacity = opacity;
+name.style.opacity = opacity;
+
+      let fadeIn = setInterval(() => {
+         if (opacity >= 1) {
+            clearInterval(fadeIn);
+         }
+         image.style.opacity = opacity;
+         name.style.opacity = opacity;
+         opacity += 0.01;
+        
+
+      }, 10);
+    
+image.classList.remove("animated");
+image.offsetWidth;
+image.classList.add("animated");
+
+name.classlist.remove("animated");
+name.offsetHeight;
+name.classList.add("animated");
+}
+main();
+</script>
+</body>
+</html> 
